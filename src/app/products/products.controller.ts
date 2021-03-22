@@ -24,7 +24,7 @@ export class ProductsController {
     async getOne(
         @Res() res: Response,
         @Param("id") id: string,
-        @Query("metadata") metadata: boolean
+        @Query("metadata") metadata?: boolean
     ) {
        try {
            const product = await this.productService.getOne(id, metadata);
