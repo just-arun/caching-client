@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
+import { Controller, Get, Param, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { ProductsService } from './products.service';
 
@@ -23,10 +23,11 @@ export class ProductsController {
     @Get("/:id")
     async getOne(
         @Res() res: Response,
-        @Param("id") id: string
+        @Param("id") id: string,
+        @Query("metadata") metadata: boolean
     ) {
        try {
-           const product = await this.productService.getOne(id);
+           const product = await this.productService.getOne(id, metadata);
            return res.status(200).json({ product })
        } catch (error) {
            return res.status(500).json({ error })
